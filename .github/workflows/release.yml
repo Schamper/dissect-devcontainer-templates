@@ -5,7 +5,13 @@ on:
 jobs:
   deploy:
     if: ${{ github.ref == 'refs/heads/main' }}
+    name: Release devcontainer (${{ matrix.arch }})
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - arch: linux/amd64
+          - arch: linux/arm64
     steps:
       - name: Checkout (GitHub)
         uses: actions/checkout@v4
@@ -14,6 +20,7 @@ jobs:
         uses: docker/setup-qemu-action@v3
 
       - name: Setup Docker buildx for multi-architecture builds
+        if: ${{ matrix.arch }} == 'linux/arm64'
         uses: docker/setup-buildx-action@v3
         with:
           use: true
@@ -30,7 +37,7 @@ jobs:
         with:
           imageName: ghcr.io/schamper/dissect-devcontainer
           cacheFrom: ghcr.io/schamper/dissect-devcontainer
-          platform: linux/amd64,linux/arm64
+          platform: ${{ matrix.arch }}
           push: filter
           refFilterForPush: refs/heads/main
           eventFilterForPush: |
