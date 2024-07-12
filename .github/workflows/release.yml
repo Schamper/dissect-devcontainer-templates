@@ -21,6 +21,10 @@ jobs:
         uses: devcontainers/ci@v0.3
         with:
           imageName: ghcr.io/schamper/dissect-devcontainer
-          push: always
+          cacheFrom: ghcr.io/schamper/dissect-devcontainer
+          push: filter
+          refFilterForPush: refs/heads/main
+          eventFilterForPush: |
+            workflow_dispatch
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
