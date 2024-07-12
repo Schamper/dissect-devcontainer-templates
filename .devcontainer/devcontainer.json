@@ -1,0 +1,45 @@
+{
+    "name": "Dissect",
+    "image": "python:3.11-bullseye",
+    "features": {
+        "ghcr.io/devcontainers/features/common-utils:2": {
+            "installZsh": "true",
+            "configureZshAsDefaultShell": "true",
+            "username": "user",
+            "userUid": "1000",
+            "userGid": "1000",
+            "upgradePackages": "true"
+        },
+        "ghcr.io/devcontainers/features/python:1": {
+            "toolsToInstall": "tox"
+        },
+        "ghcr.io/devcontainers/features/git-lfs:1": {
+            "autoPull": true,
+            "version": "latest"
+        }
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "charliermarsh.ruff"
+            ],
+            "settings": {
+                "python.analysis.autoImportCompletions": true,
+                "python.analysis.indexing": true,
+                "python.analysis.inlayHints.functionReturnTypes": true,
+                "python.analysis.packageIndexDepths": [
+                    {
+                        "name": "dissect",
+                        "depth": 69,
+                        "includeAllSymbols": true
+                    }
+                ],
+                "[python]": {
+                    "editor.formatOnSave": true,
+                    "editor.defaultFormatter": "charliermarsh.ruff"
+                }
+            }
+        }
+    },
+    "remoteUser": "user"
+}

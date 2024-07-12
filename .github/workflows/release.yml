@@ -9,10 +9,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: "Publish Templates"
-        uses: devcontainers/action@v1
+      - name: Pre-build dev container image
+        uses: devcontainers/ci@v0.3
         with:
-          publish-templates: "true"
-          base-path-to-templates: "./src"
+          push: always
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
