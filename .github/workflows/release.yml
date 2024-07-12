@@ -12,6 +12,7 @@ jobs:
       - name: Pre-build dev container image
         uses: devcontainers/ci@v0.3
         with:
+          imageName: ghcr.io/schamper/dissect-devcontainer-templates/dissect
           push: always
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
